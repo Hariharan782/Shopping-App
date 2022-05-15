@@ -20,6 +20,7 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 
 import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { LoginComponent } from './login/login.component';
 
@@ -62,7 +63,9 @@ const config = {
       { path: 'login', component: LoginComponent },
       { path: 'admin/orders', component: AdminOrdersComponent },
       { path: 'admin/products', component: AdminProductsComponent },
+      { path: 'my/orders', component: MyOrdersComponent },
     ]),
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
