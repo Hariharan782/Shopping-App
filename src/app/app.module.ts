@@ -23,6 +23,10 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { LoginComponent } from './login/login.component';
+import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { UserService } from './services/user.service';
+import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 
 const config = {
   apiKey: 'AIzaSyAEZBZCenO6apbMC5dVxTt_sTtwKnzwfWw',
@@ -58,16 +62,42 @@ const config = {
       { path: '', component: HomeComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'shoppingCart', component: ShoppingCartComponent },
-      { path: 'checkout', component: CheckoutComponent },
-      { path: 'order-sucess', component: OrderSuccessComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'admin/orders', component: AdminOrdersComponent },
-      { path: 'admin/products', component: AdminProductsComponent },
-      { path: 'my/orders', component: MyOrdersComponent },
+      {
+        path: 'checkout',
+        component: CheckoutComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'order-sucess',
+        component: OrderSuccessComponent,
+        canActivate: [AuthGuardService],
+      },
+
+      {
+        path: 'admin/orders',
+        component: AdminOrdersComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService],
+      },
+      {
+        path: 'admin/products',
+        component: AdminProductsComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService],
+      },
+      {
+        path: 'my/orders',
+        component: MyOrdersComponent,
+        canActivate: [AuthGuardService],
+      },
     ]),
     NgbModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuardService,
+    UserService,
+    AdminAuthGuardService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

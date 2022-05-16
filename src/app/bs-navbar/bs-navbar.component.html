@@ -21,16 +21,22 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/shoppingCart">Shopping Cart</a>
         </li>
+        <ng-template #anonymousUser
+          ><li class="nav-item">
+            <a class="nav-link" routerLink="/login">LOGIN</a>
+          </li></ng-template
+        >
 
         <li ngbDropdown class="nav-item dropdown">
           <a
+            *ngIf="appUser; else anonymousUser"
             ngbDropdownToggle
             class="nav-link dropdown-toggle"
             id="dropdown05"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            >Username</a
-          >
+            >{{ appUser.name }}
+          </a>
           <ul
             ngbDropdownMenu
             class="dropdown-menu"
@@ -39,18 +45,20 @@
             <li>
               <a class="dropdown-item" routerLink="my/orders"> my orders</a>
             </li>
+            <ng-container>
+              <li>
+                <a class="dropdown-item" routerLink="admin/orders"
+                  >Manage Orders</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="admin/products"
+                  >Manage Products</a
+                >
+              </li>
+            </ng-container>
             <li>
-              <a class="dropdown-item" routerLink="admin/orders"
-                >Manage Orders</a
-              >
-            </li>
-            <li>
-              <a class="dropdown-item" routerLink="admin/products"
-                >Manage Products</a
-              >
-            </li>
-            <li>
-              <a class="dropdown-item">LOg out</a>
+              <a class="dropdown-item" (click)="logout()">LOg out</a>
             </li>
           </ul>
         </li>
