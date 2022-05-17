@@ -27,6 +27,10 @@ import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { UserService } from './services/user.service';
 import { AdminAuthGuardService } from './services/admin-auth-guard.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoryService } from './services/category.service';
+import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
 
 const config = {
   apiKey: 'AIzaSyAEZBZCenO6apbMC5dVxTt_sTtwKnzwfWw',
@@ -50,14 +54,17 @@ const config = {
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
+    ProductFormComponent,
   ],
   imports: [
+    CustomFormsModule,
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(config),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
     AngularFireDatabaseModule, // storage
+    FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'products', component: ProductsComponent },
@@ -79,10 +86,18 @@ const config = {
         component: AdminOrdersComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService],
       },
+
+      {
+        path: 'admin/products/new',
+        component: ProductFormComponent,
+      },
+      {
+        path: 'admin/products/:id',
+        component: ProductFormComponent,
+      },
       {
         path: 'admin/products',
         component: AdminProductsComponent,
-        canActivate: [AuthGuardService, AdminAuthGuardService],
       },
       {
         path: 'my/orders',
@@ -97,6 +112,8 @@ const config = {
     AuthGuardService,
     UserService,
     AdminAuthGuardService,
+    CategoryService,
+    ProductFormComponent,
   ],
   bootstrap: [AppComponent],
 })
