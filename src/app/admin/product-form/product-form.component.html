@@ -4,10 +4,10 @@
       <div action="" class="form-group">
         <label for="title">Title</label
         ><input
-          [(ngModel)]="product.title"
           #title="ngModel"
           name="title"
           id="title"
+          [(ngModel)]="product.title"
           class="form-control"
           type="text"
           required
@@ -86,8 +86,8 @@
     <div class="card" style="width: 18rem">
       <img [src]="product.imageURL" class="card-img-top" />
       <div class="card-body">
-        <h5 class="card-title">{{ product.value }}</h5>
-        <p class="card-text">{{ product.value | currency: "INR":"symbol" }}</p>
+        <h5 class="card-title">{{ product.title }}</h5>
+        <p class="card-text">{{ product.price | currency: "INR":"symbol" }}</p>
       </div>
     </div>
   </div>

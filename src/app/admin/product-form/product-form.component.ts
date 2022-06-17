@@ -28,9 +28,12 @@ export class ProductFormComponent {
     //take will take only 1 observable so no need to unsubscribe
     if (id)
       this.productServics
-        .get('id')
+        .get(id)
         .pipe(take(1))
-        .subscribe((p) => (this.product = p));
+        .subscribe((p) => {
+          this.product = p;
+          console.log(this.product);
+        });
   }
 
   save(product) {
