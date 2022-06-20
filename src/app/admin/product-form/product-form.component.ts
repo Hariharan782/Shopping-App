@@ -13,6 +13,7 @@ export class ProductFormComponent {
   categories$;
   product: any = {};
   categories: any[];
+  id;
   constructor(
     private categoryService: CategoryService,
     private productServics: ProductService,
@@ -24,11 +25,11 @@ export class ProductFormComponent {
       .subscribe((message) => {
         this.categories = message;
       });
-    let id = this.route.snapshot.paramMap.get('id');
+    this.id = this.route.snapshot.paramMap.get('id');
     //take will take only 1 observable so no need to unsubscribe
-    if (id)
+    if (this.id)
       this.productServics
-        .get(id)
+        .get(this.id)
         .pipe(take(1))
         .subscribe((p) => {
           this.product = p;
@@ -37,7 +38,14 @@ export class ProductFormComponent {
   }
 
   save(product) {
-    this.productServics.create(product);
+    if (this.id) this.productServics.update(this.id, product);
+    else this.productServics.create(product);
+    this.router.navigate(['/admin/products']);
+  }
+
+  delete() {
+    if (!confirm('are u sure you want to delete this product?')) return;
+    this.productServics.delete(this.id);
     this.router.navigate(['/admin/products']);
   }
 }
