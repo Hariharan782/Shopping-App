@@ -86,7 +86,11 @@
     </form>
   </div>
   <div class="col-md-6">
-    <div class="card" style="width: 18rem">
+    <div
+      *ngIf="product.title || product.price || product.imageURL"
+      class="card"
+      style="width: 18rem"
+    >
       <img
         [src]="product.imageURL"
         class="card-img-top"
