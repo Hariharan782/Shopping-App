@@ -47,8 +47,8 @@
           required
         >
           <option value=" "></option>
-          <option *ngFor="let c of categories">
-            {{ c.name }}
+          <option *ngFor="let c of categories$ | async" [value]="c.key">
+            {{ c.payload.val().name }}
           </option>
         </select>
         <div
@@ -60,12 +60,12 @@
       </div>
 
       <div action="" class="form-group">
-        <label for="imageURL">Image URL</label
+        <label for="imageUrl">Image URL</label
         ><input
-          #imageURL="ngModel"
-          name="imageURL"
-          [(ngModel)]="product.imageURL"
-          id="imageURL"
+          #imageUrl="ngModel"
+          name="imageUrl"
+          [(ngModel)]="product.imageUrl"
+          id="imageUrl"
           class="form-control"
           type="text"
           required
@@ -74,10 +74,10 @@
       </div>
       <div
         class="alert alert-danger"
-        *ngIf="imageURL.invalid && imageURL.touched"
+        *ngIf="imageUrl.invalid && imageUrl.touched"
       >
-        <div *ngIf="imageURL.errors.required">image URL is required</div>
-        <div *ngIf="imageURL.errors.url">imageURL is not valid</div>
+        <div *ngIf="imageUrl.errors.required">image URL is required</div>
+        <div *ngIf="imageUrl.errors.url">imageUrl is not valid</div>
       </div>
       <button class="btn btn-primary">Save</button>
       <button class="btn btn-danger" type="button" (click)="delete()">
@@ -87,14 +87,14 @@
   </div>
   <div class="col-md-6">
     <div
-      *ngIf="product.title || product.price || product.imageURL"
+      *ngIf="product.title || product.price || product.imageUrl"
       class="card"
       style="width: 18rem"
     >
       <img
-        [src]="product.imageURL"
+        [src]="product.imageUrl"
         class="card-img-top"
-        *ngIf="product.imageURL"
+        *ngIf="product.imageUrl"
         alt="image not valid/found"
       />
       <div class="card-body">

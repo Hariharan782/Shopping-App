@@ -66,7 +66,7 @@ const config = {
     AngularFireDatabaseModule, // storage
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
+      { path: '', component: ProductsComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'shoppingCart', component: ShoppingCartComponent },
       { path: 'login', component: LoginComponent },

@@ -20,11 +20,7 @@ export class ProductFormComponent {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.categories$ = this.categoryService
-      .getCategories()
-      .subscribe((message) => {
-        this.categories = message;
-      });
+    this.categories$ = this.categoryService.getAll();
     this.id = this.route.snapshot.paramMap.get('id');
     //take will take only 1 observable so no need to unsubscribe
     if (this.id)
