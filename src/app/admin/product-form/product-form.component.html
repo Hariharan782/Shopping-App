@@ -86,21 +86,6 @@
     </form>
   </div>
   <div class="col-md-6">
-    <div
-      *ngIf="product.title || product.price || product.imageUrl"
-      class="card"
-      style="width: 18rem"
-    >
-      <img
-        [src]="product.imageUrl"
-        class="card-img-top"
-        *ngIf="product.imageUrl"
-        alt="image not valid/found"
-      />
-      <div class="card-body">
-        <h5 class="card-title">{{ product.title }}</h5>
-        <p class="card-text">{{ product.price | currency: "INR":"symbol" }}</p>
-      </div>
-    </div>
+    <product-card [product]="product" [showActions]="false"> </product-card>
   </div>
 </div>

@@ -29,7 +29,7 @@ export class ProductFormComponent {
         .pipe(take(1))
         .subscribe((p) => {
           this.product = p;
-          console.log(this.product);
+          console.log(this.product + 'here');
         });
   }
 

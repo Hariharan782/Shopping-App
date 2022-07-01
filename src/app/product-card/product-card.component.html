@@ -1,0 +1,17 @@
+<div *ngIf="product.title || product.price || product.imageUrl" class="card">
+  <img
+    *ngIf="product.imageUrl"
+    class="card-img-top"
+    [src]="product.imageUrl"
+    alt="{{ product.title }}"
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ product.title }}</h5>
+    <p class="card-text">{{ product.price | currency: "INR":true }}</p>
+  </div>
+  <div class="card-footer">
+    <button *ngIf="showActions" routerLink="" class="btn btn-primary btn-block"></button>
+      Add to cart
+    </button>
+  </div>
+</div>

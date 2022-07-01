@@ -31,6 +31,8 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { CategoryService } from './services/category.service';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 const config = {
   apiKey: 'AIzaSyAEZBZCenO6apbMC5dVxTt_sTtwKnzwfWw',
@@ -55,6 +57,9 @@ const config = {
     AdminProductsComponent,
     AdminOrdersComponent,
     ProductFormComponent,
+    ProductFilterComponent,
+
+    ProductCardComponent,
   ],
   imports: [
     CustomFormsModule,
