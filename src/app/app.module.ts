@@ -33,6 +33,7 @@ import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { ShoppingCartService } from './services/shopping-cart.service';
 
 const config = {
   apiKey: 'AIzaSyAEZBZCenO6apbMC5dVxTt_sTtwKnzwfWw',
@@ -119,6 +120,7 @@ const config = {
     AdminAuthGuardService,
     CategoryService,
     ProductFormComponent,
+    ShoppingCartService,
   ],
   bootstrap: [AppComponent],
 })
