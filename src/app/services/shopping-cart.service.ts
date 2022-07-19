@@ -18,7 +18,16 @@ export class ShoppingCartService {
       .push({ dateCreated: new Date().getTime() });
   }
 
-  private async getOrCreateCartId() {
+  async getCart() {
+    let cartId = await this.getOrCreateCartId();
+    return this.db.object('/shopping-carts/' + cartId);
+  }
+
+  private getItem(cartId: string, productId: string) {
+    return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);
+  }
+
+  private async getOrCreateCartId(): Promise<string> {
     let cartId = localStorage.getItem('cartId');
     if (cartId) return cartId;
     let result = await this.create();
@@ -26,16 +35,9 @@ export class ShoppingCartService {
     return result.key;
   }
 
-  private getCart(cartId) {
-    this.db.object('/shopping-carts/' + cartId);
-  }
-
   async addToCart(product: Product) {
     let cartId = await this.getOrCreateCartId();
-    let items$: AngularFireObject<any> = this.db.object(
-      '/shopping-carts/' + cartId + '/items' + product.key
-    );
-
+    let items$: AngularFireObject<any> = this.getItem(cartId, product.key);
     items$
       .snapshotChanges()
       .pipe(take(1))
