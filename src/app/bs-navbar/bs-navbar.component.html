@@ -20,7 +20,12 @@
       <div class="collapse navbar-collapse" id="navbarsExample05">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/shoppingCart">Shopping Cart</a>
+            <a class="nav-link" routerLink="/shoppingCart"
+              >Shopping Cart
+              <span class="badge badge-pill badge-warning">{{
+                shoppingCartItemCount
+              }}</span></a
+            >
           </li>
           <ng-template #anonymousUser
             ><li class="nav-item">

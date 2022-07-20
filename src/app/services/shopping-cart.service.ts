@@ -5,6 +5,8 @@ import {
 } from '@angular/fire/compat/database';
 import { Product } from '../model/product';
 import { take } from 'rxjs/operators';
+import { async } from '@firebase/util';
+import { shoppingCart } from '../model/shopping-cart';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +20,7 @@ export class ShoppingCartService {
       .push({ dateCreated: new Date().getTime() });
   }
 
-  async getCart() {
+  async getCart(): Promise<AngularFireObject<shoppingCart>> {
     let cartId = await this.getOrCreateCartId();
     return this.db.object('/shopping-carts/' + cartId);
   }
@@ -35,7 +37,15 @@ export class ShoppingCartService {
     return result.key;
   }
 
-  async addToCart(product: Product) {
+  addToCart(product: Product) {
+    this.updateItemQuantity(product, 1);
+  }
+
+  removeFromCart(product: Product) {
+    this.updateItemQuantity(product, -1);
+  }
+
+  private async updateItemQuantity(product: Product, change: Number) {
     let cartId = await this.getOrCreateCartId();
     let items$: AngularFireObject<any> = this.getItem(cartId, product.key);
     items$
@@ -45,9 +55,9 @@ export class ShoppingCartService {
         if (item.payload.exists())
           items$.update({
             product: product,
-            quantity: item.payload.exportVal().quantity + 1,
+            quantity: item.payload.exportVal().quantity + change,
           });
-        else items$.set({ product: product, quantity: 1 });
+        else items$.set({ product: product, quantity: 0 });
       });
   }
 }

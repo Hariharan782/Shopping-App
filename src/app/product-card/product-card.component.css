@@ -7,3 +7,17 @@
     margin-bottom: 30px;
  
 }
+
+.btn-block{
+    display: block;
+    width: 100%;
+    
+}
+
+.rowss{
+    display: flex;
+    flex-direction: row;
+   
+}
+
+
